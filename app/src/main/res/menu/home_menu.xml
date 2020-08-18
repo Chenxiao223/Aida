@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/wardrobefragment"
+        android:icon="@drawable/main_bottom_yichu"
+        android:title="@string/my_wardrobe" />
+
+    <item
+        android:id="@+id/fashionfragment"
+        android:icon="@drawable/main_bottom_shishang"
+        android:title="@string/fashion" />
+
+    <item
+        android:id="@+id/searchfragment"
+        android:icon="@drawable/main_bottom_search"
+        android:title="@string/intelligent_search" />
+
+    <item
+        android:icon="@drawable/main_bottom_me"
+        android:title="@string/my" />
+
+</menu>
