@@ -24,14 +24,14 @@
         <ImageView
             android:id="@+id/iv_clothes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@mipmap/clothes" />
 
         <ImageView
             android:id="@+id/iv_accessories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@mipmap/accessories" />
     </LinearLayout>
@@ -45,14 +45,14 @@
         <ImageView
             android:id="@+id/iv_bottoms"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@mipmap/bottoms" />
 
         <ImageView
             android:id="@+id/iv_shoes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@mipmap/shoes" />
     </LinearLayout>

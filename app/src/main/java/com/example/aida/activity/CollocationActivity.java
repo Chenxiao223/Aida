@@ -59,6 +59,7 @@ public class CollocationActivity extends BaseActivity {
     private String imagePath2;
     private String imagePath3;
     private String imagePath4;
+    private Long id = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,20 @@ public class CollocationActivity extends BaseActivity {
         tv_title.setText("搭配");
         tv_text_right.setVisibility(View.VISIBLE);
         tv_text_right.setText("保存");
+        id = getIntent().getExtras().getLong("id");
+        if (id != 0) {
+            List<Collocation> list = collocationDao.queryBuilder().where(CollocationDao.Properties.Id.eq(id)).list();
+            if (!list.isEmpty()) {
+                imagePath1 = list.get(0).getClothes();
+                Glide.with(CollocationActivity.this).asBitmap().load(imagePath1).thumbnail(0.5f).into(iv_clothes);
+                imagePath2 = list.get(0).getBottoms();
+                Glide.with(CollocationActivity.this).asBitmap().load(imagePath2).thumbnail(0.5f).into(iv_bottoms);
+                imagePath3 = list.get(0).getShoes();
+                Glide.with(CollocationActivity.this).asBitmap().load(imagePath3).thumbnail(0.5f).into(iv_shoes);
+                imagePath4 = list.get(0).getAccessories();
+                Glide.with(CollocationActivity.this).asBitmap().load(imagePath4).thumbnail(0.5f).into(iv_accessories);
+            }
+        }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -151,6 +166,9 @@ public class CollocationActivity extends BaseActivity {
                                 if (TextUtils.isEmpty(str)) {
                                     Toast.makeText(CollocationActivity.this, "请输入名称", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    if (id != 0) {//修改
+                                        collocationDao.deleteByKey(id);
+                                    }
                                     Collocation collocation = new Collocation(null, str, imagePath1, imagePath2, imagePath4, imagePath3);
                                     collocationDao.insert(collocation);
                                     finish();

@@ -24,5 +24,7 @@ public class WardrobeAdapter extends BaseQuickAdapter<Collocation, BaseViewHolde
         Glide.with(context).asBitmap().load(item.getBottoms()).thumbnail(0.5f).into((ImageView) helper.getView(R.id.image2));
         Glide.with(context).asBitmap().load(item.getShoes()).thumbnail(0.5f).into((ImageView) helper.getView(R.id.image3));
         Glide.with(context).asBitmap().load(item.getAccessories()).thumbnail(0.5f).into((ImageView) helper.getView(R.id.image4));
+
+        helper.addOnClickListener(R.id.tv_alter).addOnClickListener(R.id.tv_delete);
     }
 }

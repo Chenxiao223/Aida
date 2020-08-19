@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.aida.MyApplication;
 import com.example.aida.R;
 import com.example.aida.activity.AddClothesActivity;
@@ -73,6 +74,7 @@ public class WardrobeFragment extends BaseFragment {
         initImmersionBar(mView);
         initView();
         initData();
+        initListener();
     }
 
     private void initView() {
@@ -110,6 +112,26 @@ public class WardrobeFragment extends BaseFragment {
         adapter.notifyDataSetChanged();
     }
 
+    public void initListener() {
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Collocation collocation = (Collocation) adapter.getItem(position);
+                switch (view.getId()) {
+                    case R.id.tv_alter://修改
+                        Intent intent = new Intent(getContext(), CollocationActivity.class);
+                        intent.putExtra("id", collocation.getId());
+                        startActivityForResult(intent, FLAG);
+                        break;
+                    case R.id.tv_delete://删除
+                        collocationDao.deleteByKey(collocation.getId());
+                        initData();
+                        break;
+                }
+            }
+        });
+    }
+
     @OnClick({R.id.ly_jacket, R.id.ly_bottoms, R.id.ly_shoes, R.id.ly_accessories, R.id.tv_text_right})
     public void onClick(View view) {
         Intent intent;
@@ -140,6 +162,7 @@ public class WardrobeFragment extends BaseFragment {
                 break;
             case R.id.tv_text_right://添加搭配
                 intent = new Intent(getActivity(), CollocationActivity.class);
+                intent.putExtra("id", 0);
                 startActivityForResult(intent, FLAG);
                 break;
         }
