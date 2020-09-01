@@ -30,6 +30,7 @@ public class CollocationDao extends AbstractDao<Collocation, Long> {
         public final static Property Bottoms = new Property(3, String.class, "bottoms", false, "BOTTOMS");
         public final static Property Accessories = new Property(4, String.class, "accessories", false, "ACCESSORIES");
         public final static Property Shoes = new Property(5, String.class, "shoes", false, "SHOES");
+        public final static Property Isdelete = new Property(6, int.class, "isdelete", false, "ISDELETE");
     }
 
 
@@ -50,7 +51,8 @@ public class CollocationDao extends AbstractDao<Collocation, Long> {
                 "\"CLOTHES\" TEXT," + // 2: clothes
                 "\"BOTTOMS\" TEXT," + // 3: bottoms
                 "\"ACCESSORIES\" TEXT," + // 4: accessories
-                "\"SHOES\" TEXT);"); // 5: shoes
+                "\"SHOES\" TEXT," + // 5: shoes
+                "\"ISDELETE\" INTEGER NOT NULL );"); // 6: isdelete
     }
 
     /** Drops the underlying database table. */
@@ -92,6 +94,7 @@ public class CollocationDao extends AbstractDao<Collocation, Long> {
         if (shoes != null) {
             stmt.bindString(6, shoes);
         }
+        stmt.bindLong(7, entity.getIsdelete());
     }
 
     @Override
@@ -127,6 +130,7 @@ public class CollocationDao extends AbstractDao<Collocation, Long> {
         if (shoes != null) {
             stmt.bindString(6, shoes);
         }
+        stmt.bindLong(7, entity.getIsdelete());
     }
 
     @Override
@@ -142,7 +146,8 @@ public class CollocationDao extends AbstractDao<Collocation, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // clothes
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // bottoms
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // accessories
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // shoes
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // shoes
+            cursor.getInt(offset + 6) // isdelete
         );
         return entity;
     }
@@ -155,6 +160,7 @@ public class CollocationDao extends AbstractDao<Collocation, Long> {
         entity.setBottoms(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setAccessories(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setShoes(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setIsdelete(cursor.getInt(offset + 6));
      }
     
     @Override

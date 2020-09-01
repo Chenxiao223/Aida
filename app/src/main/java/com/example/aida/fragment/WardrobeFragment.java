@@ -1,6 +1,9 @@
 package com.example.aida.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -78,6 +81,10 @@ public class WardrobeFragment extends BaseFragment {
     }
 
     private void initView() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("action.refreshFriend");
+        getActivity().registerReceiver(mRefreshBroadcastReceiver, intentFilter);
+
         imageListDao = MyApplication.getInstance().getDaoSession().getImageListDao();
         collocationDao = MyApplication.getInstance().getDaoSession().getCollocationDao();
         iv_back.setVisibility(View.GONE);
@@ -107,7 +114,7 @@ public class WardrobeFragment extends BaseFragment {
             tv_accessories.setText("共" + list4.size() + "个");
         }
 
-        List<Collocation> list5 = collocationDao.queryBuilder().list();
+        List<Collocation> list5 = collocationDao.queryBuilder().where(CollocationDao.Properties.Isdelete.eq(0)).list();
         adapter.setNewData(list5);
         adapter.notifyDataSetChanged();
     }
@@ -124,7 +131,8 @@ public class WardrobeFragment extends BaseFragment {
                         startActivityForResult(intent, FLAG);
                         break;
                     case R.id.tv_delete://删除
-                        collocationDao.deleteByKey(collocation.getId());
+                        collocation.setIsdelete(1);
+                        collocationDao.update(collocation);
                         initData();
                         break;
                 }
@@ -172,5 +180,22 @@ public class WardrobeFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         initData();
+    }
+
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("action.refreshFriend")) {
+                initData();
+            }
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mRefreshBroadcastReceiver);
     }
 }

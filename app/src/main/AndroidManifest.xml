@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CollocationActivity"></activity>
+        <activity android:name=".activity.SettingActivity"/>
+        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.RecycleBinActivity" />
+        <activity android:name=".activity.CollocationActivity" />
         <activity android:name=".activity.AddClothesActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.LoginActivity" />

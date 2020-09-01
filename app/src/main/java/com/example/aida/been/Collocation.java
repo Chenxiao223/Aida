@@ -13,15 +13,17 @@ public class Collocation {
     private String bottoms;
     private String accessories;
     private String shoes;
-    @Generated(hash = 408058547)
+    private int isdelete;//0不删除 1删除
+    @Generated(hash = 1563080526)
     public Collocation(Long id, String name, String clothes, String bottoms,
-            String accessories, String shoes) {
+            String accessories, String shoes, int isdelete) {
         this.id = id;
         this.name = name;
         this.clothes = clothes;
         this.bottoms = bottoms;
         this.accessories = accessories;
         this.shoes = shoes;
+        this.isdelete = isdelete;
     }
     @Generated(hash = 107499761)
     public Collocation() {
@@ -61,5 +63,11 @@ public class Collocation {
     }
     public void setShoes(String shoes) {
         this.shoes = shoes;
+    }
+    public int getIsdelete() {
+        return this.isdelete;
+    }
+    public void setIsdelete(int isdelete) {
+        this.isdelete = isdelete;
     }
 }

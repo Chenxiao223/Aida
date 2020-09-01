@@ -169,7 +169,7 @@ public class CollocationActivity extends BaseActivity {
                                     if (id != 0) {//修改
                                         collocationDao.deleteByKey(id);
                                     }
-                                    Collocation collocation = new Collocation(null, str, imagePath1, imagePath2, imagePath4, imagePath3);
+                                    Collocation collocation = new Collocation(null, str, imagePath1, imagePath2, imagePath4, imagePath3,0);
                                     collocationDao.insert(collocation);
                                     finish();
                                 }

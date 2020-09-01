@@ -10,7 +10,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/white" />
+        android:background="@color/blue" />
 
     <EditText
         android:id="@+id/et_search"
@@ -29,6 +29,10 @@
         android:singleLine="true"
         android:textColorHint="#929292"
         android:textSize="14sp" />
-    android:text="搜索" />
+
+    <com.example.aida.view.SlideRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
